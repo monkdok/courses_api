@@ -28,11 +28,11 @@ class Course(TimeStampMixin):
     # Getting related objects of model CourseParticipant
     @property
     def course_participant(self):
-        return self.course_participant_set.all()
+        return self.courseparticipant_set.all()
 
     @property
     def students(self):
-        course_participants = self.courseparticipant_set.all()
+        course_participants = self.course_participant.all()
         students = []
         for course_participant in course_participants:
             students.append(course_participant.student.get_full_name())
@@ -44,7 +44,7 @@ class Course(TimeStampMixin):
 
 
 class CourseParticipant(TimeStampMixin):
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     is_completed = models.BooleanField(default=False)
 

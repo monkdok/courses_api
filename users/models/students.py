@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import UserManager
+from django.db import models
 
 User = get_user_model()
 
@@ -21,7 +22,7 @@ class Student(User):
 
     def save(self, *args, **kwargs):
         from users.models import UserType
-        self.user_type = UserType.sTudent.value
+        self.user_type = UserType.STUDENT.value
         super().save(*args, **kwargs)
 
     # Getting related objects of model CourseParticipant
