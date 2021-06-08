@@ -7,7 +7,8 @@ def export_csv(student_id: int):
     student = Student.objects.filter(id=student_id).first()
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = f'attachment; filename="{student.get_full_name()}.csv"'
-    writer = csv.DictWriter(response, fieldnames=['Name', 'Courses num', 'Completed courses num'])
+    field_names = ['Name', 'Courses num', 'Completed courses num']
+    writer = csv.DictWriter(response, fieldnames=field_names)
     writer.writeheader()
     writer.writerow({
         'Name': student.get_full_name(),

@@ -17,7 +17,6 @@ class CourseParticipantSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-        print(instance.id)
         rep['student'] = instance.student.get_full_name()
         return rep
 
@@ -28,7 +27,7 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = [
-            'id', 'url', 'name', 'description', 'start_date',
+            'id', 'name', 'description', 'start_date',
             'end_date', 'students_count',
             'course_participant',
         ]

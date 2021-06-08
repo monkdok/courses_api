@@ -17,7 +17,7 @@ class StudentViewSet(ModelViewSet):
 class ExportViewSet(APIView):
     def get(self, request, export_format=None):
         student_id = request.GET.get('student')
-        if not export_format:
+        if export_format == 'csv':
             response = export_csv(student_id)
             return response
 
